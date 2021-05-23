@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'poll.apps.PollConfig'
+    'poll.apps.PollConfig',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [

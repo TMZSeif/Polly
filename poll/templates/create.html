@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} - Create{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card">
+	<div class="card-body">
+		<h1>Create Poll</h1>
+		<form method="post">
+			{% csrf_token %}
+			{{poll_form|crispy}}
+			<ul class="list-group" style="margin-top: 10px">
+				<li class="list-group-item"><h2>Options</h2></li>
+			</ul>
+			<button type="submit" class="btn btn-success">Create Poll</button>
+			<button id="addOption" type="button" class="btn btn-primary">Add Option</button>
+		</form>
+	</div>
+</div>
+<script>
+
+	function deleteOption(id) {
+		li = document.getElementById(id)
+		inp = document.getElementById(id + "-")
+		inp.parentNode.removeChild(inp)
+		console.log(li)
+		li.parentNode.removeChild(li)
+	}
+	
+	num = 0
+	
+    function addOption() {
+		console.log("Hello")
+		name = prompt("Please enter Option Name")
+		if (!name) return
+		ul = document.querySelector("ul")
+		li = document.createElement("li")
+		li.innerHTML = name + "<button onclick='deleteOption("+num+")' type='button' style='float: right' class='btn btn-danger'>&times;</button>"
+		li.className = "list-group-item"
+		li.name = num
+		li.id = num + "-"
+		inp = document.createElement("input")
+		inp.id = num
+		inp.style.display = "none"
+		inp.value = name
+		inp.name = "options"
+		ul.appendChild(inp)
+		num++
+		ul.appendChild(li)
+	}
+	
+	btn = document.getElementById("addOption")
+	btn.addEventListener("click", addOption)
+</script>
+{% endblock %}
