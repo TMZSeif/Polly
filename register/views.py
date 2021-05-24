@@ -13,7 +13,7 @@ def register(response):
             user = authenticate(username=username, password=password)
             login(response, user)
             print(response.user)
-            return redirect('/blog/home')
+            return redirect('/')
         
     else:
         form = RegisterForm()
