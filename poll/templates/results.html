@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} - Results{% endblock %}
+
+{% block content %}
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+body { margin-top:20px; }
+.panel-body:not(.two-col) { padding:0px }
+.glyphicon { margin-right:5px; }
+.glyphicon-new-window { margin-left:5px; }
+.panel-body .radio,.panel-body .checkbox {margin-top: 0px;margin-bottom: 0px;}
+.panel-body .list-group {margin-bottom: 0;}
+.margin-bottom-none { margin-bottom: 0; }
+.panel-body .radio label,.panel-body .checkbox label { display:block; }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-arrow-right"></span>{{poll.question}}
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+						{% for option in poll.options_set.all %}
+							<li class="list-group-item">
+								<div class="radio">
+									
+										<p style="float:right">{{option.votes}}</p>
+										{{option.name}}
+									
+								</div>
+							</li>
+						{% endfor %}
+                    </ul>
+                </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

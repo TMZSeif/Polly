@@ -14,6 +14,7 @@ class Poll(models.Model):
 class Options(models.Model):
     name = models.CharField(max_length=100)
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
+    voters = models.ForeignKey(MyUser, on_delete=models.SET_NULL, null=True, default=None)
     votes = models.PositiveIntegerField(default=0)
     def __str__(self):
         return self.name

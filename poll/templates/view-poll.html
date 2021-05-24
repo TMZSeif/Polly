@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} - View Poll{% endblock %}
+
+{% block content %}
+	<div class="card">
+		<div class="card-body">
+			<form method="post">
+				{% csrf_token %}
+				<button type="submit" class="btn btn-danger" name="delete-poll" style="float:right" value="{{poll.id}}">&times;</button>
+			</form>
+			<input name="{{poll.question}}" form="form-save" type="text" value="{{poll.question}}">
+			<ul class="list-group" style="margin-top:15px">
+				{% for option in poll.options_set.all %}
+					<li class="list-group-item">
+					<form method="post">
+						{% csrf_token %}
+						<button type="submit" class="btn btn-danger" name="delete" style="float:right" value="{{option.id}}">&times;</button>
+					</form>
+					<input form="form-save" name="{{option.name}}" type="text" value="{{option.name}}">
+					</li>
+				{% endfor %}
+			<ul>
+			<form method="post" id="form-save">
+				{% csrf_token %}
+				<button type="submit" class="btn btn-primary" name="save" value="{{poll.id}}">Save</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}

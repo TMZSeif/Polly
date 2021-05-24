@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} - View Polls{% endblock %}
+
+{% block content %}
+{% for poll in polls %}
+	<div class="card">
+		<div class="card-body">
+			<form method="post">
+				{% csrf_token %}
+				<button type="submit" name="poll" value="{{poll.id}}" style="float:right" class="btn btn-danger">&times;</button>
+			</form>
+			<a href="/view/{{poll.id}}"><h1>{{poll.question}}</h1></a>
+		</div>
+	</div>
+{% endfor %}
+{% endblock %}

@@ -16,8 +16,13 @@ body {
     <h1 class="text-center" style="margin-top: 50px; font-size: 4em">Welcome To Polly</h1>
     <h2 class="text-center text-muted" style="font-size: 2em">Easiest Poll Creator Yet!</h2>
     <div class="container text-center" style="margin-top: 20px">
+		{% if user.is_authenticated %}
         <a role="button" href="/create" class="btn btn-primary">Create A Poll</a>
         <a role="button" href="/view" class="btn btn-success">View Existing Polls</a>
+		{% else %}
+		<a role="button" href="/login" class="btn btn-primary">Login</a>
+        <a role="button" href="/register" class="btn btn-success">Sign Up</a>
+		{% endif %}
     </div>
 </div>
 {% endblock %}
