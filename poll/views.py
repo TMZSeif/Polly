@@ -89,8 +89,18 @@ def poll(request, id):
     if request.method == "POST":
         print(request.POST)
         try:
+            first_time = False
             option = Options.objects.get(id=request.POST["option"])
-            option.votes += 1
+            if request.user.options == None:
+                first_time = True
+            if request.user not in option.myuser_set.all():
+                option.votes += 1
+                if not first_time:
+                    request.user.options.votes -= 1
+                    request.user.options.save()
+                option.myuser_set.add(request.user)
+                print(option.myuser_set.all(), "ASFG")
+                print( request.user.options)
             option.save()
         finally:
             return render(request, "poll.html", {"poll": poll})
